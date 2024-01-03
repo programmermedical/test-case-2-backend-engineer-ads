@@ -1,4 +1,4 @@
-# ReportIn BackEnd
+# Application
 + Framework : Express.Js
 + Architecture : REST API
 + ORM : Sequelize
@@ -16,3 +16,17 @@
 
 # API
 dokumentation at request.rest file (using REST Client)
+
+# To-do list
+1. Buat API untuk melakukan Create, Update, dan Delete data Produk. (done)
+    
+   **Optional :** Buat API untuk melakukan Create, Update dan Delete data Kategori. 
+    
+2. Buat API untuk melakukan Create, Update, dan Delete data Asset Produk.
+3. Buat API untuk mendapatkan seluruh Data Produk beserta kategori asset-assetnya.
+    
+    **Optional :** Berikan parameter pada endpoint untuk melakukan sorting berdasarkan harga produk.
+    
+4. Buat API untuk mendapatkan seluruh Data Asset dan tampilkan nama Produk dari aset tersebut.
+
+> Gunakan Express.js dan library eloquent ORM untuk javascript (disarankan menggunakan Sequelize). 
