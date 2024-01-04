@@ -10,7 +10,10 @@ class Categories {
         data: response,
       });
     } catch (error) {
-      console.log(error);
+      res.status(404).json({
+        status: false,
+        message: error,
+      });
     }
   };
 
@@ -25,7 +28,10 @@ class Categories {
         data: response,
       });
     } catch (error) {
-      console.log(error);
+      res.status(404).json({
+        status: false,
+        message: error,
+      });
     }
   };
 
@@ -51,7 +57,10 @@ class Categories {
         message: 'Categories has been successfull updated!!',
       });
     } catch (error) {
-      console.log(error);
+      res.status(404).json({
+        status: false,
+        message: error,
+      });
     }
   };
 
@@ -75,7 +84,10 @@ class Categories {
         message: 'Categories has been successfull deleted!!',
       });
     } catch (error) {
-      console.log(error);
+      res.status(404).json({
+        status: false,
+        message: error,
+      });
     }
   };
 }

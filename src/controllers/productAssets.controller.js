@@ -4,21 +4,20 @@
 const Models = require('../models/database.models');
 
 class ProductAssetsController {
-  static getAllAssets = async (req, res) => {
+  static getAssets = async (req, res) => {
     try {
       const response = await Models.ProductAssets.findAll({
         attributes: ['id', 'image', 'createdAt', 'updatedAt'],
-        include: {
-          model: Models.Products,
-          attributes: ['id', 'name', 'slug', 'price'],
-        },
       });
       res.status(200).send({
         status: true,
         data: response,
       });
     } catch (error) {
-      console.log('error');
+      res.status(404).json({
+        status: false,
+        message: error,
+      });
     }
   };
 
@@ -36,7 +35,10 @@ class ProductAssetsController {
         data: response,
       });
     } catch (error) {
-      console.log(error);
+      res.status(404).json({
+        status: false,
+        message: error,
+      });
     }
   };
 
@@ -65,7 +67,10 @@ class ProductAssetsController {
         message: 'Assets has been success updated!!',
       });
     } catch (error) {
-      console.log(error);
+      res.status(404).json({
+        status: false,
+        message: error,
+      });
     }
   };
 
@@ -89,7 +94,31 @@ class ProductAssetsController {
         message: 'Assets has been successfull deleted!!',
       });
     } catch (error) {
-      console.log(error);
+      res.status(404).json({
+        status: false,
+        message: error,
+      });
+    }
+  };
+
+  static getAllAssets = async (req, res) => {
+    try {
+      const response = await Models.ProductAssets.findAll({
+        attributes: ['id', 'image', 'createdAt', 'updatedAt'],
+        include: {
+          model: Models.Products,
+          attributes: ['id', 'name', 'slug', 'price'],
+        },
+      });
+      res.status(200).send({
+        status: true,
+        data: response,
+      });
+    } catch (error) {
+      res.status(404).json({
+        status: false,
+        message: error,
+      });
     }
   };
 }

@@ -1,27 +1,24 @@
 /* eslint-disable linebreak-style */
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable newline-per-chained-call */
 /* eslint-disable no-unused-expressions */
 const Models = require('../models/database.models');
 
 class ProductController {
-  static getAllProducts = async (req, res) => {
+  static getProducts = async (req, res) => {
     try {
       const response = await Models.Products.findAll({
         attributes: ['id', 'name', 'slug', 'price', 'createdAt', 'updatedAt'],
-        include: [{
-          model: Models.Categories,
-          attributes: ['id', 'name'],
-        }, {
-          model: Models.ProductAssets,
-          attributes: ['id', 'image'],
-        }],
       });
       res.status(200).send({
         status: true,
         data: response,
       });
     } catch (error) {
-      console.log('error');
+      res.status(404).json({
+        status: false,
+        message: error,
+      });
     }
   };
 
@@ -41,7 +38,10 @@ class ProductController {
         data: response,
       });
     } catch (error) {
-      console.log(error);
+      res.status(404).json({
+        status: false,
+        message: error,
+      });
     }
   };
 
@@ -75,7 +75,10 @@ class ProductController {
         message: 'Product has been success updated!!',
       });
     } catch (error) {
-      console.log(error);
+      res.status(404).json({
+        status: false,
+        message: error,
+      });
     }
   };
 
@@ -99,7 +102,46 @@ class ProductController {
         message: 'Product has been successfull deleted!!',
       });
     } catch (error) {
-      console.log(error);
+      res.status(404).json({
+        status: false,
+        message: error,
+      });
+    }
+  };
+
+  static getAllProducts = async (req, res) => {
+    try {
+      let _table = req.params.table;
+      let _sort = req.params.sort;
+
+      if (!_table) {
+        _table = 'createdAt';
+      }
+      if (!_sort) {
+        _sort = 'DESC';
+      }
+      const response = await Models.Products.findAll({
+        order: [
+          [_table, _sort],
+        ],
+        attributes: ['id', 'name', 'slug', 'price', 'createdAt', 'updatedAt'],
+        include: [{
+          model: Models.Categories,
+          attributes: ['id', 'name'],
+        }, {
+          model: Models.ProductAssets,
+          attributes: ['id', 'image'],
+        }],
+      });
+      res.status(200).send({
+        status: true,
+        data: response,
+      });
+    } catch (error) {
+      res.status(404).json({
+        status: false,
+        message: error,
+      });
     }
   };
 }
