@@ -1,5 +1,7 @@
 /* eslint-disable linebreak-style */
 const express = require('express');
+const productRoutes = require('./product.routes');
+const productAssetsRoutes = require('./productAssets.routes');
 
 const app = express();
 
@@ -11,9 +13,8 @@ app.get('/', async (req, res) => {
   }
 });
 
-const route = require('./product.routes');
-
-app.use('/', route);
+app.use('/product', productRoutes);
+app.use('/assets', productAssetsRoutes);
 
 const routes = app;
 

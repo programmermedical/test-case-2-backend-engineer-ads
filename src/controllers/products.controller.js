@@ -1,14 +1,14 @@
 /* eslint-disable linebreak-style */
 /* eslint-disable newline-per-chained-call */
 /* eslint-disable no-unused-expressions */
-const { Products, Categories } = require('../models/models');
+const Models = require('../models/database.models');
 
 class ProductController {
   static getAllProducts = async (req, res) => {
     try {
-      const response = await Products.findAll({
+      const response = await Models.Products.findAll({
         include: {
-          model: Categories,
+          model: Models.Categories,
         },
       });
       res.status(200).send({
@@ -24,7 +24,7 @@ class ProductController {
     try {
       const slug = JSON.stringify(req.body.name).toLowerCase().split(/[ ./,]+/).join('-');
       const slugparse = JSON.parse(slug.split(/[-]+/).join('-'));
-      const response = await Products.create({
+      const response = await Models.Products.create({
         name: req.body.name,
         slug: slugparse,
         price: req.body.price,
@@ -45,7 +45,7 @@ class ProductController {
       const productId = req.params.id;
       const slug = JSON.stringify(req.body.name).toLowerCase().split(/[ ./,]+/).join('-');
       const slugparse = JSON.parse(slug.split(/[-]+/).join('-'));
-      const response = await Products.update(
+      const response = await Models.Products.update(
         {
           name: req.body.name,
           slug: slugparse,
@@ -77,7 +77,7 @@ class ProductController {
   static deleteProduct = async (req, res) => {
     try {
       const productId = req.params.id;
-      const response = await Products.destroy({
+      const response = await Models.Products.destroy({
         where: {
           id: productId,
         },

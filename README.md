@@ -4,29 +4,29 @@
 + ORM : Sequelize
 + RDBMS : PostgreSQL 16
 + Node Version : 20.10.0 LTS
-+ Relationship : + [categories] one-to-many [products] && + [product_assets] one-to-many [product]
++ Relationship : + [categories] one-to-many [products] && + [products] one-to-many [product_assets]
 
 # Tools
++ esLint (AirB&B style)
 + dotEnv
-+ esLint(AirB&B)
 + nodemon
 
 # Feature
 + CRUD Products
 
 # API
-dokumentation at request.rest file (using REST Client)
++ dokumentation at request.rest file (using REST Client)
 
 # To-do list
 1. Buat API untuk melakukan Create, Update, dan Delete data Produk. (done)
     
    **Optional :** Buat API untuk melakukan Create, Update dan Delete data Kategori. 
     
-2. Buat API untuk melakukan Create, Update, dan Delete data Asset Produk.
+2. Buat API untuk melakukan Create, Update, dan Delete data Asset Produk. (done)
 3. Buat API untuk mendapatkan seluruh Data Produk beserta kategori asset-assetnya.
     
     **Optional :** Berikan parameter pada endpoint untuk melakukan sorting berdasarkan harga produk.
     
-4. Buat API untuk mendapatkan seluruh Data Asset dan tampilkan nama Produk dari aset tersebut.
+4. Buat API untuk mendapatkan seluruh Data Asset dan tampilkan nama Produk dari aset tersebut. (done)
 
 > Gunakan Express.js dan library eloquent ORM untuk javascript (disarankan menggunakan Sequelize). 
