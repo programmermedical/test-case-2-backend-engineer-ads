@@ -1,4 +1,6 @@
 /* eslint-disable linebreak-style */
+/* eslint-disable radix */
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable no-param-reassign */
 const Models = require('../models/database.models');
 
@@ -13,11 +15,17 @@ class ProductsServices {
   static async createProducts(data) {
     const slug = JSON.stringify(data.name).toLowerCase().split(/[ ./,]+/).join('-');
     const slugparse = JSON.parse(slug.split(/[-]+/).join('-'));
+    let _price = data.price;
+    const parseprice = [JSON.stringify(_price)];
+    const charPrice = parseprice.map((char) => char.length);
+    if (parseInt(charPrice) > 9) {
+      _price = JSON.parse(parseprice.toString().split('.').join(''));
+    }
     const postProducts = Models.Products.create({
       name: data.name,
       slug: slugparse,
-      price: data.price,
-      categoryId: data.category,
+      price: _price,
+      categoryId: data.categoryId,
     });
     return postProducts;
   }
@@ -25,12 +33,18 @@ class ProductsServices {
   static async updateProducts(productId, data) {
     const slug = JSON.stringify(data.name).toLowerCase().split(/[ ./,]+/).join('-');
     const slugparse = JSON.parse(slug.split(/[-]+/).join('-'));
+    let _price = data.price;
+    const parseprice = [JSON.stringify(_price)];
+    const charPrice = parseprice.map((char) => char.length);
+    if (parseInt(charPrice) > 9) {
+      _price = JSON.parse(parseprice.toString().split('.').join(''));
+    }
     const editProducts = await Models.Products.update(
       {
         name: data.name,
         slug: slugparse,
-        price: data.price,
-        categoryId: data.category,
+        price: _price,
+        categoryId: data.categoryId,
       },
       {
         where: {
@@ -55,7 +69,7 @@ class ProductsServices {
       table = 'createdAt';
     }
     if (!sort) {
-      sort = 'DESC';
+      sort = 'ASC';
     }
     const getAllProducts = await Models.Products.findAll({
       order: [

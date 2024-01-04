@@ -17,23 +17,23 @@ POST http://localhost:5000/products
 Content-Type: application/json
 
 {
-    "name" : "/128Gb/256Gb Garansi Resmi IBOX/TAM - Hitam, 64Gb",
-    "price" : "11.000",
-    "category" : 5
+    "name" : "Huawei/128Gb/256Gb Garansi Resmi IBOX/TAM - Hitam, 64Gb",
+    "price" : "952.000",
+    "categoryId" : 1
 }
 
 ###
-PUT  http://localhost:5000/products/5
+PUT  http://localhost:5000/products/7
 Content-Type: application/json
 
 {
-    "name" : "Ip 13 64Gb/128Gb/256Gb Garansi Resmi IBOX/TAM - Hitam, 64Gb",
-    "price" : "11.341",
-    "category" : 5
+    "name" : "Asus 64Gb/128Gb/256Gb Garansi Resmi IBOX/TAM - Hitam, 64Gb",
+    "price" : "957.000",
+    "categoryId" : 2
 }
 
 ###
-DELETE  http://localhost:5000/products/5
+DELETE  http://localhost:5000/products/6
 
 
 # PRODUCT ASSETS LOCAL API
@@ -50,16 +50,16 @@ Content-Type: application/json
 
 {
     "image" : "11 Headset-stereo-single-jack 3,5mm.png",
-    "productId" : 4
+    "productId" : 7
 }
 
 ###
-PUT  http://localhost:5000/assets/8
+PUT  http://localhost:5000/assets/9
 Content-Type: application/json
 
 {
     "image" : "samsung 2 h111 Headset-stereo-single-jack 3,5mm.png",
-    "productId" : 1
+    "productId" : 7
 }
 
 ###
@@ -80,7 +80,7 @@ Content-Type: application/json
 }
 
 ###
-PUT  http://localhost:5000/categories/7
+PUT  http://localhost:5000/categories/6
 Content-Type: application/json
 
 {
@@ -88,4 +88,4 @@ Content-Type: application/json
 }
 
 ###
-DELETE  http://localhost:5000/categories/7
+DELETE  http://localhost:5000/categories/6

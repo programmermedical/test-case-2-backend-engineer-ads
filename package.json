@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon ./src/server.js",
-    "seeds": "node ./src/manualSeeding/categorySeed.js"
+    "seed": "node ./src/manualSeeding/categorySeed.js && node ./src/manualSeeding/productSeed.js && node ./src/manualSeeding/productAssetsSeed.js"
   },
   "repository": {
     "type": "git",

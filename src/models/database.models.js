@@ -16,8 +16,8 @@ class Models {
     },
     name: DataTypes.STRING,
     slug: DataTypes.STRING,
-    // price: DataTypes.NUMERIC,
-    price: DataTypes.STRING,
+    price: DataTypes.NUMERIC,
+    // price: DataTypes.STRING,
   });
 
   static Categories = db_testCase.define('categories', {

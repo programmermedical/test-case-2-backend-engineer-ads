@@ -1,20 +1,21 @@
 /* eslint-disable linebreak-style */
-const { Categories } = require('../models/models');
+const Models = require('../models/database.models');
 
-Categories.create({
+Models.Categories.create({
   name: 'Elektronik',
 });
-Categories.create({
+Models.Categories.create({
   name: 'Fashion Pria',
 });
-Categories.create({
+Models.Categories.create({
   name: 'Fashion Wanita',
 });
-Categories.create({
+Models.Categories.create({
   name: 'Handphone & Tablet',
 });
-Categories.create({
-  name: 'Olahrage',
+Models.Categories.create({
+  name: 'Olahraga',
 });
 
-// npm run seeds
+// npm run start
+// npm run seed in other shell
