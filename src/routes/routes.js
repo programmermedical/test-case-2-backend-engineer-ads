@@ -2,6 +2,7 @@
 const express = require('express');
 const productRoutes = require('./product.routes');
 const productAssetsRoutes = require('./productAssets.routes');
+const categories = require('./categories.routes');
 
 const app = express();
 
@@ -13,8 +14,9 @@ app.get('/', async (req, res) => {
   }
 });
 
-app.use('/product', productRoutes);
+app.use('/products', productRoutes);
 app.use('/assets', productAssetsRoutes);
+app.use('/categories', categories);
 
 const routes = app;
 

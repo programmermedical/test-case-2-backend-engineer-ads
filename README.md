@@ -15,6 +15,8 @@
 + CRUD Products
 + CRUD Assets
 + Read All Assets include Product
++ Read All Product include Category and Assets
++ CRUD Categories
 
 # API
 + dokumentation at request.rest file (using REST Client)
@@ -22,10 +24,10 @@
 # To-do list
 1. Buat API untuk melakukan Create, Update, dan Delete data Produk. (done)
     
-   **Optional :** Buat API untuk melakukan Create, Update dan Delete data Kategori. 
+   **Optional :** Buat API untuk melakukan Create, Update dan Delete data Kategori. (done)
     
 2. Buat API untuk melakukan Create, Update, dan Delete data Asset Produk. (done)
-3. Buat API untuk mendapatkan seluruh Data Produk beserta kategori asset-assetnya.
+3. Buat API untuk mendapatkan seluruh Data Produk beserta kategori asset-assetnya. (done)
     
     **Optional :** Berikan parameter pada endpoint untuk melakukan sorting berdasarkan harga produk.
     

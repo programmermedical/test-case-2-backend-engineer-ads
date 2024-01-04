@@ -1,13 +1,13 @@
 ###
 GET http://localhost:5000
 
-# PRODUCT API
+# PRODUCT LOCAL API
 
 ###
-GET http://localhost:5000/product
+GET http://localhost:5000/products
 
 ###
-POST http://localhost:5000/product
+POST http://localhost:5000/products
 Content-Type: application/json
 
 {
@@ -17,7 +17,7 @@ Content-Type: application/json
 }
 
 ###
-PUT  http://localhost:5000/product/6
+PUT  http://localhost:5000/products/6
 Content-Type: application/json
 
 {
@@ -27,10 +27,10 @@ Content-Type: application/json
 }
 
 ###
-DELETE  http://localhost:5000/product/6
+DELETE  http://localhost:5000/products/6
 
 
-# PRODUCT ASSETS API
+# PRODUCT ASSETS LOCAL API
 
 ###
 GET http://localhost:5000/assets
@@ -41,7 +41,7 @@ Content-Type: application/json
 
 {
     "image" : "h111 Headset-stereo-single-jack 3,5mm.png",
-    "productId" : 2
+    "productId" : 3
 }
 
 ###
@@ -54,4 +54,29 @@ Content-Type: application/json
 }
 
 ###
-DELETE  http://localhost:5000/assets/4
+DELETE  http://localhost:5000/assets/41
+
+
+# CATEGORIES LOCAL API
+
+###
+GET http://localhost:5000/categories
+
+###
+POST http://localhost:5000/categories
+Content-Type: application/json
+
+{
+    "name" : "Sports"
+}
+
+###
+PUT  http://localhost:5000/categories/6
+Content-Type: application/json
+
+{
+    "name" : "Calistechnique"
+}
+
+###
+DELETE  http://localhost:5000/categories/6

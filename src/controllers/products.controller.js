@@ -7,9 +7,14 @@ class ProductController {
   static getAllProducts = async (req, res) => {
     try {
       const response = await Models.Products.findAll({
-        include: {
+        attributes: ['id', 'name', 'slug', 'price', 'createdAt', 'updatedAt'],
+        include: [{
           model: Models.Categories,
-        },
+          attributes: ['id', 'name'],
+        }, {
+          model: Models.ProductAssets,
+          attributes: ['id', 'image'],
+        }],
       });
       res.status(200).send({
         status: true,
