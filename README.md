@@ -13,6 +13,8 @@
 
 # Feature
 + CRUD Products
++ CRUD Assets
++ Read All Assets include Product
 
 # API
 + dokumentation at request.rest file (using REST Client)
@@ -29,4 +31,4 @@
     
 4. Buat API untuk mendapatkan seluruh Data Asset dan tampilkan nama Produk dari aset tersebut. (done)
 
-> Gunakan Express.js dan library eloquent ORM untuk javascript (disarankan menggunakan Sequelize). 
+> Gunakan Express.js dan library eloquent ORM untuk javascript (disarankan menggunakan Sequelize). (done)
