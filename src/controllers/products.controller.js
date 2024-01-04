@@ -2,14 +2,12 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable newline-per-chained-call */
 /* eslint-disable no-unused-expressions */
-const Models = require('../models/database.models');
+const ProductsServices = require('../services/products.service');
 
 class ProductController {
   static getProducts = async (req, res) => {
     try {
-      const response = await Models.Products.findAll({
-        attributes: ['id', 'name', 'slug', 'price', 'createdAt', 'updatedAt'],
-      });
+      const response = await ProductsServices.findAllProducts();
       res.status(200).send({
         status: true,
         data: response,
@@ -17,21 +15,14 @@ class ProductController {
     } catch (error) {
       res.status(404).json({
         status: false,
-        message: error,
+        message: error.message,
       });
     }
   };
 
   static postProduct = async (req, res) => {
     try {
-      const slug = JSON.stringify(req.body.name).toLowerCase().split(/[ ./,]+/).join('-');
-      const slugparse = JSON.parse(slug.split(/[-]+/).join('-'));
-      const response = await Models.Products.create({
-        name: req.body.name,
-        slug: slugparse,
-        price: req.body.price,
-        categoryId: req.body.category,
-      });
+      const response = await ProductsServices.createProducts(req.body);
       res.status(201).send({
         status: true,
         message: 'Product has been successfull created!!',
@@ -40,7 +31,7 @@ class ProductController {
     } catch (error) {
       res.status(404).json({
         status: false,
-        message: error,
+        message: error.message,
       });
     }
   };
@@ -48,21 +39,7 @@ class ProductController {
   static updateProduct = async (req, res) => {
     try {
       const productId = req.params.id;
-      const slug = JSON.stringify(req.body.name).toLowerCase().split(/[ ./,]+/).join('-');
-      const slugparse = JSON.parse(slug.split(/[-]+/).join('-'));
-      const response = await Models.Products.update(
-        {
-          name: req.body.name,
-          slug: slugparse,
-          price: req.body.price,
-          categoryId: req.body.category,
-        },
-        {
-          where: {
-            id: productId,
-          },
-        },
-      );
+      const response = await ProductsServices.updateProducts(productId, req.body);
       const checkResponse = response.toString();
       if (checkResponse === '0') {
         res.status(400).send({
@@ -77,7 +54,7 @@ class ProductController {
     } catch (error) {
       res.status(404).json({
         status: false,
-        message: error,
+        message: error.message,
       });
     }
   };
@@ -85,11 +62,7 @@ class ProductController {
   static deleteProduct = async (req, res) => {
     try {
       const productId = req.params.id;
-      const response = await Models.Products.destroy({
-        where: {
-          id: productId,
-        },
-      });
+      const response = await ProductsServices.destroyProducts(productId);
       const checkResponse = response.toString();
       if (checkResponse === '0') {
         res.status(400).send({
@@ -104,35 +77,16 @@ class ProductController {
     } catch (error) {
       res.status(404).json({
         status: false,
-        message: error,
+        message: error.message,
       });
     }
   };
 
   static getAllProducts = async (req, res) => {
     try {
-      let _table = req.params.table;
-      let _sort = req.params.sort;
-
-      if (!_table) {
-        _table = 'createdAt';
-      }
-      if (!_sort) {
-        _sort = 'DESC';
-      }
-      const response = await Models.Products.findAll({
-        order: [
-          [_table, _sort],
-        ],
-        attributes: ['id', 'name', 'slug', 'price', 'createdAt', 'updatedAt'],
-        include: [{
-          model: Models.Categories,
-          attributes: ['id', 'name'],
-        }, {
-          model: Models.ProductAssets,
-          attributes: ['id', 'image'],
-        }],
-      });
+      const { table } = req.params;
+      const { sort } = req.params;
+      const response = await ProductsServices.detailAllProducts(table, sort);
       res.status(200).send({
         status: true,
         data: response,
@@ -140,7 +94,7 @@ class ProductController {
     } catch (error) {
       res.status(404).json({
         status: false,
-        message: error,
+        message: error.message,
       });
     }
   };

@@ -1,10 +1,10 @@
 /* eslint-disable linebreak-style */
-const Model = require('../models/database.models');
+const CategoriesServices = require('../services/categories.service');
 
 class Categories {
   static getAllCategories = async (req, res) => {
     try {
-      const response = await Model.Categories.findAll();
+      const response = await CategoriesServices.findAllCategories();
       res.status(200).send({
         status: true,
         data: response,
@@ -12,16 +12,14 @@ class Categories {
     } catch (error) {
       res.status(404).json({
         status: false,
-        message: error,
+        message: error.message,
       });
     }
   };
 
   static postCategories = async (req, res) => {
     try {
-      const response = await Model.Categories.create({
-        name: req.body.name,
-      });
+      const response = await CategoriesServices.createCategories(req.body);
       res.status(201).send({
         status: true,
         message: 'Category has been successfull created!!',
@@ -30,7 +28,7 @@ class Categories {
     } catch (error) {
       res.status(404).json({
         status: false,
-        message: error,
+        message: error.message,
       });
     }
   };
@@ -38,13 +36,7 @@ class Categories {
   static updateCategories = async (req, res) => {
     try {
       const categoryId = req.params.id;
-      const response = await Model.Categories.update({
-        name: req.body.name,
-      }, {
-        where: {
-          id: categoryId,
-        },
-      });
+      const response = await CategoriesServices.updateCategories(categoryId, req.body);
       const checkResponse = response.toString();
       if (checkResponse === '0') {
         res.status(400).send({
@@ -59,7 +51,7 @@ class Categories {
     } catch (error) {
       res.status(404).json({
         status: false,
-        message: error,
+        message: error.message,
       });
     }
   };
@@ -67,11 +59,7 @@ class Categories {
   static deleteCategories = async (req, res) => {
     try {
       const categoryId = req.params.id;
-      const response = await Model.Categories.destroy({
-        where: {
-          id: categoryId,
-        },
-      });
+      const response = await CategoriesServices.destroyCategories(categoryId);
       const checkResponse = response.toString();
       if (checkResponse === '0') {
         res.status(400).send({
@@ -86,7 +74,7 @@ class Categories {
     } catch (error) {
       res.status(404).json({
         status: false,
-        message: error,
+        message: error.message,
       });
     }
   };

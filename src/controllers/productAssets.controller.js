@@ -1,14 +1,12 @@
 /* eslint-disable linebreak-style */
 /* eslint-disable newline-per-chained-call */
 /* eslint-disable no-unused-expressions */
-const Models = require('../models/database.models');
+const ProductAssetsServices = require('../services/productAssets.service');
 
 class ProductAssetsController {
   static getAssets = async (req, res) => {
     try {
-      const response = await Models.ProductAssets.findAll({
-        attributes: ['id', 'image', 'createdAt', 'updatedAt'],
-      });
+      const response = await ProductAssetsServices.findAllAssets();
       res.status(200).send({
         status: true,
         data: response,
@@ -16,19 +14,14 @@ class ProductAssetsController {
     } catch (error) {
       res.status(404).json({
         status: false,
-        message: error,
+        message: error.message,
       });
     }
   };
 
   static postAssets = async (req, res) => {
     try {
-      const image = JSON.stringify(req.body.image).toLowerCase().split(/[ /,]+/).join('-');
-      const imageparse = JSON.parse(image.split(/[-]+/).join('-'));
-      const response = await Models.ProductAssets.create({
-        image: imageparse,
-        productId: req.body.productId,
-      });
+      const response = await ProductAssetsServices.createAssets(req.body);
       res.status(201).send({
         status: true,
         message: 'Assets has been successfull created!!',
@@ -37,7 +30,7 @@ class ProductAssetsController {
     } catch (error) {
       res.status(404).json({
         status: false,
-        message: error,
+        message: error.message,
       });
     }
   };
@@ -45,16 +38,7 @@ class ProductAssetsController {
   static updateAssets = async (req, res) => {
     try {
       const productAssetsId = req.params.id;
-      const image = JSON.stringify(req.body.image).toLowerCase().split(/[ ./,]+/).join('-');
-      const imageparse = JSON.parse(image.split(/[-]+/).join('-'));
-      const response = await Models.ProductAssets.update({
-        image: imageparse,
-        productId: req.body.productId,
-      }, {
-        where: {
-          id: productAssetsId,
-        },
-      });
+      const response = await ProductAssetsServices.updateAssets(productAssetsId, req.body);
       const checkResponse = response.toString();
       if (checkResponse === '0') {
         res.status(400).send({
@@ -69,24 +53,20 @@ class ProductAssetsController {
     } catch (error) {
       res.status(404).json({
         status: false,
-        message: error,
+        message: error.message,
       });
     }
   };
 
   static deleteAssets = async (req, res) => {
     try {
-      const assetsId = req.params.id;
-      const response = await Models.ProductAssets.destroy({
-        where: {
-          id: assetsId,
-        },
-      });
+      const productAssetsId = req.params.id;
+      const response = await ProductAssetsServices.destroyAssets(productAssetsId);
       const checkResponse = response.toString();
       if (checkResponse === '0') {
         res.status(400).send({
           status: false,
-          message: `Assets with id ${assetsId} is not found!!`,
+          message: `Assets with id ${productAssetsId} is not found!!`,
         });
       }
       res.status(200).send({
@@ -96,20 +76,14 @@ class ProductAssetsController {
     } catch (error) {
       res.status(404).json({
         status: false,
-        message: error,
+        message: error.message,
       });
     }
   };
 
   static getAllAssets = async (req, res) => {
     try {
-      const response = await Models.ProductAssets.findAll({
-        attributes: ['id', 'image', 'createdAt', 'updatedAt'],
-        include: {
-          model: Models.Products,
-          attributes: ['id', 'name', 'slug', 'price'],
-        },
-      });
+      const response = await ProductAssetsServices.detailAllAssets();
       res.status(200).send({
         status: true,
         data: response,
@@ -117,7 +91,7 @@ class ProductAssetsController {
     } catch (error) {
       res.status(404).json({
         status: false,
-        message: error,
+        message: error.message,
       });
     }
   };

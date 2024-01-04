@@ -19,11 +19,11 @@ Content-Type: application/json
 {
     "name" : "/128Gb/256Gb Garansi Resmi IBOX/TAM - Hitam, 64Gb",
     "price" : "11.000",
-    "category" : 1
+    "category" : 5
 }
 
 ###
-PUT  http://localhost:5000/products/6
+PUT  http://localhost:5000/products/5
 Content-Type: application/json
 
 {
@@ -33,7 +33,7 @@ Content-Type: application/json
 }
 
 ###
-DELETE  http://localhost:5000/products/6
+DELETE  http://localhost:5000/products/5
 
 
 # PRODUCT ASSETS LOCAL API
@@ -49,21 +49,21 @@ POST http://localhost:5000/assets
 Content-Type: application/json
 
 {
-    "image" : "h111 Headset-stereo-single-jack 3,5mm.png",
-    "productId" : 3
+    "image" : "11 Headset-stereo-single-jack 3,5mm.png",
+    "productId" : 4
 }
 
 ###
-PUT  http://localhost:5000/assets/2
+PUT  http://localhost:5000/assets/8
 Content-Type: application/json
 
 {
     "image" : "samsung 2 h111 Headset-stereo-single-jack 3,5mm.png",
-    "productId" : 5
+    "productId" : 1
 }
 
 ###
-DELETE  http://localhost:5000/assets/41
+DELETE  http://localhost:5000/assets/8
 
 
 # CATEGORIES LOCAL API
@@ -80,7 +80,7 @@ Content-Type: application/json
 }
 
 ###
-PUT  http://localhost:5000/categories/6
+PUT  http://localhost:5000/categories/7
 Content-Type: application/json
 
 {
@@ -88,4 +88,4 @@ Content-Type: application/json
 }
 
 ###
-DELETE  http://localhost:5000/categories/6
+DELETE  http://localhost:5000/categories/7
