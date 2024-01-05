@@ -4,10 +4,10 @@
 + ORM : Sequelize
 + RDBMS : PostgreSQL 16
 + Node Version : 20.10.0 LTS
-+ Relationship : + [categories] one-to-many [products] && + [products] one-to-many [product_assets]
++ Relationship : + [categories] one-to-many [products] && + [products] one-to-many [productAssets]
 
 # Tools
-+ esLint (AirB&B style)
++ esLint (AirBnB guide style)
 + dotEnv
 + nodemon
 
