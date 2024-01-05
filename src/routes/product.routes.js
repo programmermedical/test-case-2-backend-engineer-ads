@@ -7,7 +7,7 @@ const ProductController = require('../controllers/products.controller');
 
 route.get('/', ProductController.getProducts);
 
-route.get('/:table=:sort', ProductController.getAllProducts);
+route.get('/:table=:sort', ProductController.getProducts);
 
 route.post('/', ProductController.postProduct);
 

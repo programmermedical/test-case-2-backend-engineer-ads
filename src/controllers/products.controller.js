@@ -7,7 +7,9 @@ const ProductsServices = require('../services/products.service');
 class ProductController {
   static getProducts = async (req, res) => {
     try {
-      const response = await ProductsServices.findAllProducts();
+      const { table } = req.params;
+      const { sort } = req.params;
+      const response = await ProductsServices.findAllProducts(table, sort);
       res.status(200).send({
         status: true,
         data: response,
@@ -84,9 +86,7 @@ class ProductController {
 
   static getAllProducts = async (req, res) => {
     try {
-      const { table } = req.params;
-      const { sort } = req.params;
-      const response = await ProductsServices.detailAllProducts(table, sort);
+      const response = await ProductsServices.detailAllProducts();
       res.status(200).send({
         status: true,
         data: response,

@@ -5,8 +5,17 @@
 const Models = require('../models/database.models');
 
 class ProductsServices {
-  static async findAllProducts() {
+  static async findAllProducts(table, sort) {
+    if (!table) {
+      table = 'createdAt';
+    }
+    if (!sort) {
+      sort = 'ASC';
+    }
     const getProducts = Models.Products.findAll({
+      order: [
+        [table, sort],
+      ],
       attributes: ['id', 'name', 'slug', 'price', 'createdAt', 'updatedAt'],
     });
     return getProducts;
@@ -64,17 +73,8 @@ class ProductsServices {
     return deleteProducts;
   }
 
-  static async detailAllProducts(table, sort) {
-    if (!table) {
-      table = 'createdAt';
-    }
-    if (!sort) {
-      sort = 'ASC';
-    }
+  static async detailAllProducts() {
     const getAllProducts = await Models.Products.findAll({
-      order: [
-        [table, sort],
-      ],
       attributes: ['id', 'name', 'slug', 'price', 'createdAt', 'updatedAt'],
       include: [{
         model: Models.Categories,
